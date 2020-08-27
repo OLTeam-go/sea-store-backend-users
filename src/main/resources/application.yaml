@@ -1,0 +1,16 @@
+logging.level.org.springframework: debug
+
+spring:
+  devtools:
+    restart:
+      additional-paths: /src
+
+server:
+  port: 3000
+
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://john.db.elephantsql.com:5432/hgwmwxgi
+    username: hgwmwxgi
+    password: eWNn8TsSluwZBVDpioTII2P5sdL84iD7
+    pool-size: 30
