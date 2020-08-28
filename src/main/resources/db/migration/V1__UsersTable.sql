@@ -6,6 +6,7 @@ create table Users
     Password   varchar          not null,
     Name       varchar          not null,
     Gender     varchar          not null,
+    Type       varchar          not null,
     Active     boolean          not null,
     Created_At date             not null,
     Updated_At date             not null

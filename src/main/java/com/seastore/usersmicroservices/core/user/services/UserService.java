@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,15 +24,17 @@ public class UserService {
 
     public User create(User user) {
         return userRepo.create(new User(
-                UUID.randomUUID(),
-                user.getUsername(),
-                user.getEmail(),
-                user.getPassword(),
-                user.getName(),
-                user.getGender(),
-                user.getActive(),
-                user.getCreatedAt(),
-                user.getUpdatedAt())
+                        UUID.randomUUID(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        user.getPassword(),
+                        user.getName(),
+                        user.getGender(),
+                        user.getType(),
+                        user.getActive(),
+                        new Date(),
+                        new Date()
+                )
         );
     }
 
@@ -40,15 +43,19 @@ public class UserService {
     }
 
     public User getById(UUID userId) {
-        return userRepo.getById(userId);
+        return userRepo.getByID(userId);
     }
 
     public Integer updateById(UUID userId, User userToUpdate) {
-        return userRepo.updateById(userId, userToUpdate);
+        return userRepo.updateByID(userId, userToUpdate);
     }
 
     public Integer deleteById(UUID userId) {
-        return userRepo.deleteById(userId);
+        return userRepo.deleteByID(userId);
+    }
+
+    public Integer deleteByUsername(String username) {
+        return userRepo.deleteByUsername(username);
     }
 
     public Integer updateByUsername(String username, User userToUpdate) {

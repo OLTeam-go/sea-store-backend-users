@@ -8,13 +8,15 @@ import java.util.UUID;
 public interface UserRepo {
     User create(User user);
 
-    User getById(UUID ID);
+    User getByID(UUID ID);
 
     List<User> getAll();
 
-    Integer updateById(UUID ID, User userToUpdate);
+    Integer updateByID(UUID ID, User userToUpdate);
 
-    Integer deleteById(UUID ID);
+    Integer deleteByID(UUID ID);
+
+    Integer deleteByUsername(String username);
 
     Integer updateByUsername(String username, User userToUpdate);
 
