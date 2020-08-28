@@ -42,4 +42,10 @@ public class UserControllerImpl implements UserController {
                                                                @RequestBody User userToUpdate) {
         return userService.updateByUsernameAndPassword(username, userToUpdate);
     }
+
+    @DeleteMapping("/{username}")
+    public Integer deleteByUsername(@PathVariable("username") String username) {
+        return userService.deleteByUsername(username);
+    }
+
 }

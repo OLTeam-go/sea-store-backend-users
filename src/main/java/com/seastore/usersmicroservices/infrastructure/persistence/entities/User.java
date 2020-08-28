@@ -10,20 +10,35 @@ public class User {
     private final String password;
     private final String name;
     private final String gender;
+    private final String type;
     private final Boolean active;
     private final Date createdAt;
     private final Date updatedAt;
 
-    public User(UUID ID, String username, String email, String password, String name, String gender, Boolean active, Date createdAt, Date updatedAt) {
+    public User(UUID ID, String username, String email, String password, String name, String gender, String type, Boolean active, Date createdAt, Date updatedAt) {
         this.ID = ID;
         this.username = username;
         this.email = email;
         this.password = password;
         this.name = name;
         this.gender = gender;
+        this.type = type;
         this.active = active;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
+    }
+
+    public User() {
+        this.ID = null;
+        this.username = null;
+        this.email = null;
+        this.password = null;
+        this.name = null;
+        this.gender = null;
+        this.type = null;
+        this.active = null;
+        this.createdAt = null;
+        this.updatedAt = null;
     }
 
     public UUID getID() {
@@ -48,6 +63,10 @@ public class User {
 
     public String getGender() {
         return gender;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public Boolean getActive() {

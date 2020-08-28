@@ -19,5 +19,9 @@ public interface UserController {
     @PutMapping("/{username}")
     public ResponseEntity<Integer> updateByUsernameAndPassword(@PathVariable("username") String username,
                                                                @RequestBody User userToUpdate);
+
+    @DeleteMapping("/{username}")
+    public Integer deleteByUsername(@PathVariable("username") String username);
+
 }
 
