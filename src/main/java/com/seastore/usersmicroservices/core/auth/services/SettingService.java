@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 @Service
 public class SettingService {
@@ -38,7 +38,7 @@ public class SettingService {
                     findUser.getGender(),
                     findUser.getType(),
                     optionActiveContract.isActive(),
-                    new Date(),
+                    new Timestamp(System.currentTimeMillis()),
                     findUser.getCreatedAt()
             );
 
