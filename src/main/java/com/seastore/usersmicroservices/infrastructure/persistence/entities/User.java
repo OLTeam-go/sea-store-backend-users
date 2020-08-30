@@ -2,6 +2,7 @@ package com.seastore.usersmicroservices.infrastructure.persistence.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.UUID;
@@ -18,7 +19,7 @@ public class User {
     private final Timestamp createdAt;
     private final Timestamp updatedAt;
 
-    public User(UUID ID, String username, String email, String password, String name, String gender, String type, Boolean active, Date createdAt, Date updatedAt) {
+    public User(UUID ID, String username, String email, String password, String name, String gender, String type, Boolean active, Timestamp createdAt, Timestamp updatedAt) {
         this.ID = ID;
         this.username = username;
         this.email = email;
