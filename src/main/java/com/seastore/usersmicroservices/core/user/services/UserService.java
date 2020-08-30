@@ -4,6 +4,7 @@ import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import com.seastore.usersmicroservices.infrastructure.persistence.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -42,37 +43,73 @@ public class UserService {
         return userRepo.getAll();
     }
 
-    public User getById(UUID userId) {
-        return userRepo.getByID(userId);
+    public ResponseEntity<User> getByID(UUID ID) {
+        User user = null;
+        HttpStatus status = HttpStatus.OK;
+        try {
+            user = userRepo.getByID(ID);
+        } catch (EmptyResultDataAccessException e) {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<User>(user, status);
     }
 
-    public Integer updateById(UUID userId, User userToUpdate) {
-        return userRepo.updateByID(userId, userToUpdate);
+    public ResponseEntity<Object> updateByID(UUID ID, User userToUpdate) {
+
+        Integer rowChanges = userRepo.updateByID(ID, userToUpdate);
+        HttpStatus status = HttpStatus.OK;
+        if (rowChanges == 0)
+            status = HttpStatus.NOT_FOUND;
+
+        return new ResponseEntity<Object>(null, status);
     }
 
-    public Integer deleteById(UUID userId) {
-        return userRepo.deleteByID(userId);
+    public ResponseEntity<Object> deleteByID(UUID userID) {
+        Integer rowChanges = userRepo.deleteByID(userID);
+        HttpStatus status = HttpStatus.OK;
+        if (rowChanges == 0)
+            status = HttpStatus.NOT_FOUND;
+
+        return new ResponseEntity<Object>(null, status);
+
     }
 
-    public Integer deleteByUsername(String username) {
-        return userRepo.deleteByUsername(username);
+    public ResponseEntity<User> getByUsername(String username) {
+        User user = null;
+        HttpStatus status = HttpStatus.OK;
+        try {
+            user = userRepo.getByUsername(username);
+        } catch (EmptyResultDataAccessException e) {
+            status = HttpStatus.NOT_FOUND;
+        }
+        return new ResponseEntity<User>(user, status);
     }
 
-    public Integer updateByUsername(String username, User userToUpdate) {
-        return userRepo.updateByUsername(username, userToUpdate);
+    public ResponseEntity<Object> updateByUsername(String username, User userToUpdate) {
+        Integer rowChanges = userRepo.updateByUsername(username, userToUpdate);
+        HttpStatus status = HttpStatus.OK;
+        if (rowChanges == 0)
+            status = HttpStatus.NOT_FOUND;
+
+        return new ResponseEntity<Object>(null, status);
     }
 
-    public ResponseEntity<Integer> updateByUsernameAndPassword(String username, User userToUpdate) {
-        Integer result = userRepo.updateByUsernameAndPassword(username, userToUpdate);
+    public ResponseEntity<Object> updateByUsernameAndPassword(UUID ID, String username, String password, User userToUpdate) {
+        Integer rowChanges = userRepo.updateByUsernameAndPassword(ID, username, password, userToUpdate);
         HttpStatus status = HttpStatus.OK;
 
-        if (result == 0)
+        if (rowChanges == 0)
             status = HttpStatus.UNAUTHORIZED;
 
-        return new ResponseEntity<Integer>(result, status);
+        return new ResponseEntity<Object>(null, status);
     }
 
-    public User getByUsername(String username) {
-        return userRepo.getByUsername(username);
+    public ResponseEntity<Object> deleteByUsername(String username) {
+        Integer rowChanges = userRepo.deleteByUsername(username);
+        HttpStatus status = HttpStatus.OK;
+        if (rowChanges == 0)
+            status = HttpStatus.NOT_FOUND;
+
+        return new ResponseEntity<Object>(null, status);
     }
 }
