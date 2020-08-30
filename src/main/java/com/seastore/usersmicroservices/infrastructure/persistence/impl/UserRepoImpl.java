@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -170,7 +171,7 @@ public class UserRepoImpl implements UserRepo {
                 userToUpdate.getName(),
                 userToUpdate.getGender(),
                 userToUpdate.getActive(),
-                new Date(),
+                new Timestamp(System.currentTimeMillis()),
                 findUsername);
     }
 
@@ -183,7 +184,7 @@ public class UserRepoImpl implements UserRepo {
                 userToUpdate.getPassword(),
                 userToUpdate.getName(),
                 userToUpdate.getGender(),
-                new Date(),
+                new Timestamp(System.currentTimeMillis()),
                 ID, username, password);
     }
 
