@@ -8,6 +8,6 @@ create table Users
     Gender     varchar          not null,
     Type       varchar          not null,
     Active     boolean          not null,
-    Created_At date             not null,
-    Updated_At date             not null
+    Created_At timestamp        not null,
+    Updated_At timestamp        not null
 );
