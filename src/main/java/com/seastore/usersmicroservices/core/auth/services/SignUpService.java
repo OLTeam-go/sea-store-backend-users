@@ -13,7 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 @Service
@@ -43,8 +43,9 @@ public class SignUpService {
                     registerCustomerContract.getGender(),
                     "customer",
                     true,
-                    new Date(),
-                    new Date());
+                    new Timestamp(System.currentTimeMillis()),
+                    new Timestamp(System.currentTimeMillis())
+            );
             userRepo.create(findUser);
             status = HttpStatus.CREATED;
         }
@@ -70,8 +71,9 @@ public class SignUpService {
                     registerMerchantContract.getGender(),
                     "merchant",
                     false,
-                    new Date(),
-                    new Date());
+                    new Timestamp(System.currentTimeMillis()),
+                    new Timestamp(System.currentTimeMillis())
+            );
             userRepo.create(findUser);
             status = HttpStatus.CREATED;
         }
@@ -102,8 +104,9 @@ public class SignUpService {
                     registerAdminContract.getGender(),
                     "admin",
                     true,
-                    new Date(),
-                    new Date());
+                    new Timestamp(System.currentTimeMillis()),
+                    new Timestamp(System.currentTimeMillis())
+            );
             userRepo.create(findUser);
             status = HttpStatus.CREATED;
         }
