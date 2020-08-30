@@ -72,7 +72,6 @@ public class UserRepoImpl implements UserRepo {
         }));
     }
 
-
     @Override
     public List<User> getAll() {
         final String sql = "select " +
@@ -126,38 +125,21 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public Integer deleteByUsername(String username) {
-        final String sql = "delete from Users where Username=?";
-        return jdbcTemplate.update(sql, username);
-    }
-
-    //========================================================
-
-    @Override
-    public Integer updateByUsername(String findUsername, User userToUpdate) {
-        final String sql = "update Users set Username=?, Email=?, Password=?, Name=?, Gender=?, Active=?, Updated_At=? where Username=?";
-        return jdbcTemplate.update(sql,
-                userToUpdate.getUsername(),
-                userToUpdate.getEmail(),
-                userToUpdate.getPassword(),
-                userToUpdate.getName(),
-                userToUpdate.getGender(),
-                userToUpdate.getActive(),
-                new Date(),
-                findUsername);
-    }
-
-    @Override
-    public Integer updateByUsernameAndPassword(String findUsername, User userToUpdate) {
-        final String sql = "update Users set Username=?, Email=?, Password=?, Name=?, Gender=?, Updated_At=? where Username=? and Password=?";
-        return jdbcTemplate.update(sql,
-                userToUpdate.getUsername(),
-                userToUpdate.getEmail(),
-                userToUpdate.getPassword(),
-                userToUpdate.getName(),
-                userToUpdate.getGender(),
-                new Date(),
-                findUsername, userToUpdate.getPassword());
+    public User getByUsername(String findUsername) {
+        final String sql = "select * from Users where Username=?";
+        return jdbcTemplate.queryForObject(sql, new Object[]{findUsername}, (result, i) -> {
+            UUID id = UUID.fromString(result.getString("ID"));
+            String username = result.getString("Username");
+            String email = result.getString("Email");
+            String password = result.getString("Password");
+            String name = result.getString("Name");
+            String gender = result.getString("Gender");
+            String type = result.getString("Type");
+            Boolean active = result.getBoolean("Active");
+            Date createdAt = result.getDate("Created_At");
+            Date updatedAt = result.getDate("Updated_At");
+            return new User(id, username, email, password, name, gender, type, active, createdAt, updatedAt);
+        });
     }
 
     @Override
@@ -179,20 +161,36 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
-    public User getByUsername(String findUsername) {
-        final String sql = "select * from Users where Username=?";
-        return jdbcTemplate.queryForObject(sql, new Object[]{findUsername}, (result, i) -> {
-            UUID id = UUID.fromString(result.getString("ID"));
-            String username = result.getString("Username");
-            String email = result.getString("Email");
-            String password = result.getString("Password");
-            String name = result.getString("Name");
-            String gender = result.getString("Gender");
-            String type = result.getString("Type");
-            Boolean active = result.getBoolean("Active");
-            Date createdAt = result.getDate("Created_At");
-            Date updatedAt = result.getDate("Updated_At");
-            return new User(id, username, email, password, name, gender, type, active, createdAt, updatedAt);
-        });
+    public Integer updateByUsername(String findUsername, User userToUpdate) {
+        final String sql = "update Users set Username=?, Email=?, Password=?, Name=?, Gender=?, Active=?, Updated_At=? where Username=?";
+        return jdbcTemplate.update(sql,
+                userToUpdate.getUsername(),
+                userToUpdate.getEmail(),
+                userToUpdate.getPassword(),
+                userToUpdate.getName(),
+                userToUpdate.getGender(),
+                userToUpdate.getActive(),
+                new Date(),
+                findUsername);
     }
+
+    @Override
+    public Integer updateByUsernameAndPassword(UUID ID, String username, String password, User userToUpdate) {
+        final String sql = "update Users set Username=?, Email=?, Password=?, Name=?, Gender=?, Updated_At=? where ID=? and Username=? and Password=?";
+        return jdbcTemplate.update(sql,
+                userToUpdate.getUsername(),
+                userToUpdate.getEmail(),
+                userToUpdate.getPassword(),
+                userToUpdate.getName(),
+                userToUpdate.getGender(),
+                new Date(),
+                ID, username, password);
+    }
+
+    @Override
+    public Integer deleteByUsername(String username) {
+        final String sql = "delete from Users where Username=?";
+        return jdbcTemplate.update(sql, username);
+    }
+
 }

@@ -1,11 +1,12 @@
 package com.seastore.usersmicroservices.infrastructure.delivery.impl;
 
 
-import com.seastore.usersmicroservices.core.auth.services.AuthService;
+import com.seastore.usersmicroservices.core.auth.services.SettingService;
+import com.seastore.usersmicroservices.core.auth.services.SignInService;
+import com.seastore.usersmicroservices.core.auth.services.SignUpService;
 import com.seastore.usersmicroservices.infrastructure.delivery.controllers.AuthController;
 import com.seastore.usersmicroservices.infrastructure.delivery.converters.*;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,41 +15,45 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin(origins = "*")
 public class AuthControllerImpl implements AuthController {
 
-    private final AuthService authService;
+    private final SignUpService signUpService;
+    private final SignInService signInService;
+    private final SettingService settingService;
 
-    @Autowired
-    public AuthControllerImpl(AuthService authService) {
-        this.authService = authService;
+    public AuthControllerImpl(SignUpService signUpService, SignInService signInService, SettingService settingService) {
+        this.signUpService = signUpService;
+        this.signInService = signInService;
+        this.settingService = settingService;
     }
+
 
     @Override
     @PostMapping("/login")
     public ResponseEntity<User> authLogin(@RequestBody LoginContract loginContract) {
-        return authService.login(loginContract);
+        return signInService.login(loginContract);
     }
 
     @Override
-    @PostMapping("/register/option/active")
-    public ResponseEntity<Integer> setActiveByUsername(@RequestBody RegisterOptionActiveContract registerOptionActiveContract) {
-        return authService.setActiveByUsername(registerOptionActiveContract.getUsername());
+    @PostMapping("/option/{username}/active")
+    public ResponseEntity<Object> setActiveByUsername(@PathVariable("username") String username, @RequestBody OptionActiveContract optionActiveContract) {
+        return settingService.setActiveByUsername(username, optionActiveContract);
     }
 
     @Override
     @PostMapping("/register/customer")
     public ResponseEntity<User> authRegisterCustomer(@RequestBody RegisterCustomerContract registerCustomerContract) {
-        return authService.registerCustomer(registerCustomerContract);
+        return signUpService.registerCustomer(registerCustomerContract);
     }
 
     @Override
     @PostMapping("/register/merchant")
     public ResponseEntity<User> authRegisterMerchant(RegisterMerchantContract registerMerchantContract) {
-        return authService.registerMerchant(registerMerchantContract);
+        return signUpService.registerMerchant(registerMerchantContract);
     }
 
     @Override
     @PostMapping("/register/admin")
     public ResponseEntity<User> authRegisterAdmin(RegisterAdminContract registerAdminContract) {
-        return authService.registerAdmin(registerAdminContract);
+        return signUpService.registerAdmin(registerAdminContract);
     }
 
 }
