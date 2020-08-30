@@ -1,5 +1,7 @@
 package com.seastore.usersmicroservices.infrastructure.persistence.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -73,10 +75,12 @@ public class User {
         return active;
     }
 
+    @JsonProperty("created_at")
     public Date getCreatedAt() {
         return createdAt;
     }
 
+    @JsonProperty("updated_at")
     public Date getUpdatedAt() {
         return updatedAt;
     }
