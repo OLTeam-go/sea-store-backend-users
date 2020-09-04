@@ -1,5 +1,6 @@
 package com.seastore.usersmicroservices.infrastructure.delivery.controllers;
 
+import com.seastore.usersmicroservices.infrastructure.delivery.converters.UserSettingContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +43,7 @@ public interface UserController {
     @PutMapping("/{id}/setting")
     public ResponseEntity<Object> updateByUsernameAndPassword(
             @PathVariable("id") UUID ID,
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestBody User userToUpdate
+            @RequestBody UserSettingContract userSettingContract
     );
 //
 //    @DeleteMapping

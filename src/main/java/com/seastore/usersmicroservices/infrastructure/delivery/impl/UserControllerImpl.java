@@ -3,6 +3,8 @@ package com.seastore.usersmicroservices.infrastructure.delivery.impl;
 
 import com.seastore.usersmicroservices.core.user.services.UserService;
 import com.seastore.usersmicroservices.infrastructure.delivery.controllers.UserController;
+import com.seastore.usersmicroservices.infrastructure.delivery.converters.LoginContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.converters.UserSettingContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -61,13 +63,13 @@ public class UserControllerImpl implements UserController {
 //        return userService.updateByUsername(username, userToUpdate);
 //    }
 
-    @PutMapping("/setting")
+    @PutMapping("/{id}/setting")
     public ResponseEntity<Object> updateByUsernameAndPassword(
             @PathVariable("id") UUID ID,
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestBody User userToUpdate) {
-        return userService.updateByUsernameAndPassword(ID, username, password, userToUpdate);
+            @RequestBody UserSettingContract userSettingContract) {
+        LoginContract loginCredentials = userSettingContract.getLoginCredentials();
+        User userToUpdate = userSettingContract.getUserToUpdate();
+        return userService.updateByUsernameAndPassword(ID, loginCredentials.getUsername(), loginCredentials.getPassword(), userToUpdate);
     }
 
 //    @DeleteMapping
