@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,8 +66,8 @@ public class UserRepoImpl implements UserRepo {
             String gender = result.getString("Gender");
             String type = result.getString("Type");
             Boolean active = result.getBoolean("Active");
-            Date createdAt = result.getDate("Created_At");
-            Date updatedAt = result.getDate("Updated_At");
+            Timestamp createdAt = result.getTimestamp("Created_At");
+            Timestamp updatedAt = result.getTimestamp("Updated_At");
             return new User(id, username, email, password, name, gender, type, active, createdAt, updatedAt);
         }));
     }
@@ -97,8 +96,8 @@ public class UserRepoImpl implements UserRepo {
             String gender = result.getString("Gender");
             String type = result.getString("Type");
             Boolean active = result.getBoolean("Active");
-            Date createdAt = result.getDate("Created_At");
-            Date updatedAt = result.getDate("Updated_At");
+            Timestamp createdAt = result.getTimestamp("Created_At");
+            Timestamp updatedAt = result.getTimestamp("Updated_At");
             return new User(id, username, email, password, name, gender, type, active, createdAt, updatedAt);
         }));
     }
@@ -137,8 +136,8 @@ public class UserRepoImpl implements UserRepo {
             String gender = result.getString("Gender");
             String type = result.getString("Type");
             Boolean active = result.getBoolean("Active");
-            Date createdAt = result.getDate("Created_At");
-            Date updatedAt = result.getDate("Updated_At");
+            Timestamp createdAt = result.getTimestamp("Created_At");
+            Timestamp updatedAt = result.getTimestamp("Updated_At");
             return new User(id, username, email, password, name, gender, type, active, createdAt, updatedAt);
         });
     }
@@ -155,8 +154,8 @@ public class UserRepoImpl implements UserRepo {
             String gender = result.getString("Gender");
             String type = result.getString("Type");
             Boolean active = result.getBoolean("Active");
-            Date createdAt = result.getDate("Created_At");
-            Date updatedAt = result.getDate("Updated_At");
+            Timestamp createdAt = result.getTimestamp("Created_At");
+            Timestamp updatedAt = result.getTimestamp("Updated_At");
             return new User(id, username, email, password, name, gender, type, active, createdAt, updatedAt);
         });
     }
