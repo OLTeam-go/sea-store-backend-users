@@ -5,6 +5,3 @@ heroku:
   script:
     - gem install dpl
     - dpl --provider=heroku --app=sea-store-backend-users --api-key=$HEROKU_API_KEY
-    - git add .
-    - git commit -m 'Deploying to Heroku'
-    - git push origin master
