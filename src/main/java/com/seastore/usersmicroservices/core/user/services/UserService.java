@@ -24,19 +24,19 @@ public class UserService {
     }
 
     public User create(User user) {
-        return userRepo.create(new User(
-                        UUID.randomUUID(),
-                        user.getUsername(),
-                        user.getEmail(),
-                        user.getPassword(),
-                        user.getName(),
-                        user.getGender(),
-                        user.getType(),
-                        user.getActive(),
-                        new Timestamp(System.currentTimeMillis()),
-                        new Timestamp(System.currentTimeMillis())
-                )
+        User createdUser = new User(
+                UUID.randomUUID(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getPassword(),
+                user.getName(),
+                user.getGender(),
+                user.getType(),
+                user.getActive(),
+                new Timestamp(System.currentTimeMillis()),
+                new Timestamp(System.currentTimeMillis())
         );
+        return userRepo.create(createdUser);
     }
 
     public List<User> getAll() {
@@ -44,22 +44,39 @@ public class UserService {
     }
 
     public ResponseEntity<User> getByID(UUID ID) {
-        User user = null;
+        User findUser = null;
         HttpStatus status = HttpStatus.OK;
         try {
-            user = userRepo.getByID(ID);
+            findUser = userRepo.getByID(ID);
         } catch (EmptyResultDataAccessException e) {
             status = HttpStatus.NOT_FOUND;
         }
-        return new ResponseEntity<User>(user, status);
+        return new ResponseEntity<User>(findUser, status);
     }
 
     public ResponseEntity<Object> updateByID(UUID ID, User userToUpdate) {
-
-        Integer rowChanges = userRepo.updateByID(ID, userToUpdate);
+        Integer rowChanges = 0;
         HttpStatus status = HttpStatus.OK;
-        if (rowChanges == 0)
+
+        try {
+            User findUser = userRepo.getByID(ID);
+            User updatedUser = new User(
+                    findUser.getID(),
+                    userToUpdate.getUsername(),
+                    userToUpdate.getEmail(),
+                    userToUpdate.getPassword(),
+                    userToUpdate.getName(),
+                    userToUpdate.getGender(),
+                    userToUpdate.getType(),
+                    userToUpdate.getActive(),
+                    findUser.getCreatedAt(),
+                    new Timestamp(System.currentTimeMillis())
+            );
+            rowChanges = userRepo.updateByID(ID, updatedUser);
+
+        } catch (EmptyResultDataAccessException e) {
             status = HttpStatus.NOT_FOUND;
+        }
 
         return new ResponseEntity<Object>(null, status);
     }
@@ -71,35 +88,71 @@ public class UserService {
             status = HttpStatus.NOT_FOUND;
 
         return new ResponseEntity<Object>(null, status);
-
     }
 
     public ResponseEntity<User> getByUsername(String username) {
-        User user = null;
+        User findUser = null;
         HttpStatus status = HttpStatus.OK;
         try {
-            user = userRepo.getByUsername(username);
+            findUser = userRepo.getByUsername(username);
         } catch (EmptyResultDataAccessException e) {
             status = HttpStatus.NOT_FOUND;
         }
-        return new ResponseEntity<User>(user, status);
+        return new ResponseEntity<User>(findUser, status);
     }
 
     public ResponseEntity<Object> updateByUsername(String username, User userToUpdate) {
-        Integer rowChanges = userRepo.updateByUsername(username, userToUpdate);
+        Integer rowChanges = 0;
         HttpStatus status = HttpStatus.OK;
-        if (rowChanges == 0)
+        try {
+            User findUser = userRepo.getByUsername(username);
+            User updatedUser = new User(
+                    findUser.getID(),
+                    userToUpdate.getUsername(),
+                    userToUpdate.getEmail(),
+                    userToUpdate.getPassword(),
+                    userToUpdate.getName(),
+                    userToUpdate.getGender(),
+                    userToUpdate.getType(),
+                    userToUpdate.getActive(),
+                    findUser.getCreatedAt(),
+                    new Timestamp(System.currentTimeMillis())
+            );
+            rowChanges = userRepo.updateByID(findUser.getID(), updatedUser);
+        } catch (EmptyResultDataAccessException e) {
             status = HttpStatus.NOT_FOUND;
+        }
 
         return new ResponseEntity<Object>(null, status);
     }
 
     public ResponseEntity<Object> updateByUsernameAndPassword(UUID ID, String username, String password, User userToUpdate) {
-        Integer rowChanges = userRepo.updateByUsernameAndPassword(ID, username, password, userToUpdate);
+        Integer rowChanges = 0;
         HttpStatus status = HttpStatus.OK;
 
-        if (rowChanges == 0)
-            status = HttpStatus.UNAUTHORIZED;
+        try {
+            User findUser = userRepo.getByID(ID);
+            User updatedUser = new User(
+                    findUser.getID(),
+                    userToUpdate.getUsername(),
+                    userToUpdate.getEmail(),
+                    userToUpdate.getPassword(),
+                    userToUpdate.getName(),
+                    userToUpdate.getGender(),
+                    userToUpdate.getType(),
+                    userToUpdate.getActive(),
+                    findUser.getCreatedAt(),
+                    new Timestamp(System.currentTimeMillis())
+            );
+            if (findUser.getUsername().equals(username) && findUser.getPassword().equals(password)) {
+                rowChanges = userRepo.updateByID(findUser.getID(), userToUpdate);
+            } else {
+                status = HttpStatus.UNAUTHORIZED;
+            }
+
+        } catch (EmptyResultDataAccessException e) {
+            status = HttpStatus.NOT_FOUND;
+        }
 
         return new ResponseEntity<Object>(null, status);
     }

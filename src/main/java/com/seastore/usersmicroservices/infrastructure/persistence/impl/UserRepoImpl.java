@@ -170,7 +170,7 @@ public class UserRepoImpl implements UserRepo {
                 userToUpdate.getName(),
                 userToUpdate.getGender(),
                 userToUpdate.getActive(),
-                new Timestamp(System.currentTimeMillis()),
+                userToUpdate.getUpdatedAt(),
                 findUsername);
     }
 
@@ -183,7 +183,7 @@ public class UserRepoImpl implements UserRepo {
                 userToUpdate.getPassword(),
                 userToUpdate.getName(),
                 userToUpdate.getGender(),
-                new Timestamp(System.currentTimeMillis()),
+                userToUpdate.getUpdatedAt(),
                 ID, username, password);
     }
 
