@@ -33,7 +33,7 @@ public class AuthControllerImpl implements AuthController {
     }
 
     @Override
-    @PostMapping("/option/{username}/active")
+    @PostMapping("/setting/{username}/active")
     public ResponseEntity<Object> setActiveByUsername(@PathVariable("username") String username, @RequestBody OptionActiveContract optionActiveContract) {
         return settingService.setActiveByUsername(username, optionActiveContract);
     }
