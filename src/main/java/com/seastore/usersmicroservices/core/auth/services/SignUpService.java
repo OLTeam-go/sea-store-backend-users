@@ -87,7 +87,7 @@ public class SignUpService {
         String token = "admin";
 
         try {
-            if (registerAdminContract.getToken() == null || registerAdminContract.getToken().equals(token)) {
+            if (registerAdminContract.getToken() == null || !registerAdminContract.getToken().equals(token)) {
                 status = HttpStatus.UNAUTHORIZED;
             } else {
                 findUser = userRepo.getByUsernameAndPassword(
