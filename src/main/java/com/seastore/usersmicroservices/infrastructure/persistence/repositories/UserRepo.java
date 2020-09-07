@@ -10,6 +10,8 @@ public interface UserRepo {
 
     List<User> getAll();
 
+    List<User> getAllPendingMerchant();
+
     User getByID(UUID ID);
 
     Integer updateByID(UUID ID, User userToUpdate);

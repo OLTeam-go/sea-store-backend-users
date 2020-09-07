@@ -1,7 +1,6 @@
 package com.seastore.usersmicroservices.core.auth.services;
 
 
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.OptionActiveContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import com.seastore.usersmicroservices.infrastructure.persistence.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +11,32 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.List;
+import java.util.UUID;
 
 @Service
-public class SettingService {
+public class PendingMerchantService {
     private final UserRepo userRepo;
 
     @Autowired
-    public SettingService(@Qualifier("User") UserRepo userRepo) {
+    public PendingMerchantService(@Qualifier("User") UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
-    public ResponseEntity<Object> setActiveByUsername(String username, OptionActiveContract optionActiveContract) {
-        User findUser = null, updatedUser = null;
+    public ResponseEntity<List<User>> getAll() {
+        HttpStatus status = HttpStatus.OK;
+        List<User> allPendingMerchant = userRepo.getAllPendingMerchant();
+        return new ResponseEntity<List<User>>(allPendingMerchant, status);
+    }
+
+    public ResponseEntity<Object> accept(UUID ID) {
+        User findUser = null, userToUpdate = null;
         HttpStatus status = null;
         Integer rowChanges = null;
 
         try {
-            findUser = userRepo.getByUsername(username);
-            updatedUser = new User(
+            findUser = userRepo.getByID(ID);
+            userToUpdate = new User(
                     findUser.getID(),
                     findUser.getUsername(),
                     findUser.getEmail(),
@@ -37,12 +44,12 @@ public class SettingService {
                     findUser.getName(),
                     findUser.getGender(),
                     findUser.getType(),
-                    optionActiveContract.isActive(),
+                    true,
                     new Timestamp(System.currentTimeMillis()),
                     findUser.getCreatedAt()
             );
 
-            rowChanges = userRepo.updateByID(findUser.getID(), updatedUser);
+            rowChanges = userRepo.updateByID(ID, userToUpdate);
             status = HttpStatus.OK;
         } catch (EmptyResultDataAccessException e) {
             status = HttpStatus.NOT_FOUND;
@@ -51,5 +58,17 @@ public class SettingService {
         return new ResponseEntity<Object>(null, status);
     }
 
+    public ResponseEntity<Object> reject(UUID ID) {
+        HttpStatus status = null;
+        Integer rowChanges = null;
 
+        rowChanges = userRepo.deleteByID(ID);
+        status = HttpStatus.OK;
+
+        if (rowChanges == 0) {
+            status = HttpStatus.NOT_FOUND;
+        }
+
+        return new ResponseEntity<Object>(null, status);
+    }
 }
