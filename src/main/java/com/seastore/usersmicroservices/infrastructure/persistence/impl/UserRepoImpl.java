@@ -103,6 +103,38 @@ public class UserRepoImpl implements UserRepo {
     }
 
     @Override
+    public List<User> getAllPendingMerchant() {
+        final String sql = "select " +
+                "ID," +
+                "Username, " +
+                "Email, " +
+                "Password, " +
+                "Name, " +
+                "Gender, " +
+                "Type, " +
+                "Active, " +
+                "Created_At, " +
+                "Updated_At " +
+                "from " +
+                "Users " +
+                "where " +
+                "Type='merchant' and Active=false";
+        return jdbcTemplate.query(sql, ((result, i) -> {
+            UUID id = UUID.fromString(result.getString("ID"));
+            String username = result.getString("Username");
+            String email = result.getString("Email");
+            String password = result.getString("Password");
+            String name = result.getString("Name");
+            String gender = result.getString("Gender");
+            String type = result.getString("Type");
+            Boolean active = result.getBoolean("Active");
+            Timestamp createdAt = result.getTimestamp("Created_At");
+            Timestamp updatedAt = result.getTimestamp("Updated_At");
+            return new User(id, username, email, password, name, gender, type, active, createdAt, updatedAt);
+        }));
+    }
+
+    @Override
     public Integer updateByID(UUID findID, User userToUpdate) {
         final String sql = "update Users set Username=?, Email=?, Password=?, Name=?, Gender=?, Type=?, Active=?, Created_At=?, Updated_At=? where ID=?";
         return jdbcTemplate.update(sql,

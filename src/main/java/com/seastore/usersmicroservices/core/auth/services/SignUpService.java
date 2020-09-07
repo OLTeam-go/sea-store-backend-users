@@ -5,25 +5,30 @@ import com.seastore.usersmicroservices.infrastructure.delivery.converters.Regist
 import com.seastore.usersmicroservices.infrastructure.delivery.converters.RegisterCustomerContract;
 import com.seastore.usersmicroservices.infrastructure.delivery.converters.RegisterMerchantContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
+import com.seastore.usersmicroservices.infrastructure.persistence.entities.Wallet;
 import com.seastore.usersmicroservices.infrastructure.persistence.repositories.UserRepo;
+import com.seastore.usersmicroservices.infrastructure.persistence.repositories.WalletRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.UUID;
 
 @Service
 public class SignUpService {
     private final UserRepo userRepo;
+    private final WalletRepo walletRepo;
 
     @Autowired
-    public SignUpService(@Qualifier("User") UserRepo userRepo) {
+    public SignUpService(UserRepo userRepo, WalletRepo walletRepo) {
         this.userRepo = userRepo;
+        this.walletRepo = walletRepo;
     }
+
 
     public ResponseEntity<User> registerCustomer(RegisterCustomerContract registerCustomerContract) {
         User findUser = null;
@@ -47,6 +52,14 @@ public class SignUpService {
                     new Timestamp(System.currentTimeMillis())
             );
             userRepo.create(findUser);
+            Wallet newWallet = new Wallet(
+                    UUID.randomUUID(),
+                    findUser.getID(),
+                    new BigDecimal(0),
+                    new Timestamp(System.currentTimeMillis()),
+                    new Timestamp(System.currentTimeMillis())
+            );
+            walletRepo.create(newWallet);
             status = HttpStatus.CREATED;
         }
 
@@ -75,6 +88,14 @@ public class SignUpService {
                     new Timestamp(System.currentTimeMillis())
             );
             userRepo.create(findUser);
+            Wallet newWallet = new Wallet(
+                    UUID.randomUUID(),
+                    findUser.getID(),
+                    new BigDecimal(0),
+                    new Timestamp(System.currentTimeMillis()),
+                    new Timestamp(System.currentTimeMillis())
+            );
+            walletRepo.create(newWallet);
             status = HttpStatus.CREATED;
         }
 
