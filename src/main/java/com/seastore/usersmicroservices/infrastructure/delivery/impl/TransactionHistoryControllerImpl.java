@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("api/v1/transactions/history")
+@RequestMapping("api/v1/transactions/histories")
 @CrossOrigin(origins = "*")
 public class TransactionHistoryControllerImpl implements TransactionHistoryController {
 
