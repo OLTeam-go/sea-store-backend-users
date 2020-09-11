@@ -3,8 +3,8 @@ package com.seastore.usersmicroservices.infrastructure.delivery.impl;
 
 import com.seastore.usersmicroservices.core.user.services.UserService;
 import com.seastore.usersmicroservices.infrastructure.delivery.controllers.UserController;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.LoginContract;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.UserSettingContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.LoginContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.UserSettingContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

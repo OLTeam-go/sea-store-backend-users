@@ -1,4 +1,4 @@
-package com.seastore.usersmicroservices.infrastructure.delivery.converters;
+package com.seastore.usersmicroservices.infrastructure.delivery.contracts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;

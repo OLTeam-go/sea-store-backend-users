@@ -1,7 +1,7 @@
 package com.seastore.usersmicroservices.core.auth.services;
 
 
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.LoginContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.LoginContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import com.seastore.usersmicroservices.infrastructure.persistence.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,7 @@ package com.seastore.usersmicroservices.infrastructure.delivery.impl;
 
 import com.seastore.usersmicroservices.core.wallet.services.TransactionService;
 import com.seastore.usersmicroservices.infrastructure.delivery.controllers.TransactionController;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.WalletTransactionContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.WalletTransactionContract;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

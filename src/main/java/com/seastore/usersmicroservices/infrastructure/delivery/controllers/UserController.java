@@ -1,6 +1,6 @@
 package com.seastore.usersmicroservices.infrastructure.delivery.controllers;
 
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.UserSettingContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.UserSettingContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
