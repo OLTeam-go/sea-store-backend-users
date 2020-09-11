@@ -90,7 +90,7 @@ public class WalletRepoImpl implements WalletRepo {
                 "Wallets.Updated_At " +
                 "from " +
                 "Wallets " +
-                "inner join Users on Users.ID = Wallets.User_ID" +
+                "inner join Users on Users.ID = Wallets.User_ID " +
                 "where " +
                 "Users.Username=?";
         return jdbcTemplate.queryForObject(sql, new Object[]{findUsername}, ((result, i) -> {
@@ -139,18 +139,5 @@ public class WalletRepoImpl implements WalletRepo {
         final String sql = "delete from Wallets where ID=?";
         return jdbcTemplate.update(sql, findID);
     }
-
-    @Override
-    public Integer debitByID(UUID findID, BigDecimal amount) {
-        final String sql = "update Wallets set Balance=Balance-?, Updated_At=? where ID=?";
-        return jdbcTemplate.update(sql, amount, new Timestamp(System.currentTimeMillis()), findID);
-    }
-
-    @Override
-    public Integer creditByID(UUID findID, BigDecimal amount) {
-        final String sql = "update Wallets set Balance=Balance+?, Updated_At=? where ID=?";
-        return jdbcTemplate.update(sql, amount, new Timestamp(System.currentTimeMillis()), findID);
-    }
-
 
 }

@@ -2,7 +2,6 @@ package com.seastore.usersmicroservices.infrastructure.persistence.repositories;
 
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.Wallet;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,9 +19,4 @@ public interface WalletRepo {
     Integer updateByID(UUID ID, Wallet walletToUpdate);
 
     Integer deleteByID(UUID ID);
-
-    Integer debitByID(UUID ID, BigDecimal amount);
-
-    Integer creditByID(UUID ID, BigDecimal amount);
-
 }

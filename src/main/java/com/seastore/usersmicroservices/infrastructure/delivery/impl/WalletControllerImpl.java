@@ -3,7 +3,6 @@ package com.seastore.usersmicroservices.infrastructure.delivery.impl;
 
 import com.seastore.usersmicroservices.core.wallet.services.WalletService;
 import com.seastore.usersmicroservices.infrastructure.delivery.controllers.WalletController;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.WalletTransactionContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.Wallet;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -48,11 +47,10 @@ public class WalletControllerImpl implements WalletController {
         return walletService.getByUsername(username);
     }
 
-
     @Override
-    @GetMapping("/userid/{userid}")
+    @GetMapping("/users/{user_id}")
     public ResponseEntity<Wallet> getByUserID(
-            @PathVariable("userid") UUID userID
+            @PathVariable("user_id") UUID userID
     ) {
         return walletService.getByUserID(userID);
     }
@@ -70,35 +68,4 @@ public class WalletControllerImpl implements WalletController {
         return walletService.deleteByID(ID);
     }
 
-    @Override
-    @PutMapping("/{id}/credit")
-    public ResponseEntity<Object> creditByID(
-            @PathVariable("id") UUID ID,
-            @RequestBody WalletTransactionContract walletTransactionContract) {
-        return walletService.creditByID(ID, walletTransactionContract.getAmount());
-    }
-
-    @Override
-    @PutMapping("/{id}/debit")
-    public ResponseEntity<Object> debitByID(
-            @PathVariable("id") UUID ID,
-            @RequestBody WalletTransactionContract walletTransactionContract) {
-        return walletService.creditByID(ID, walletTransactionContract.getAmount());
-    }
-
-    @Override
-    @PutMapping("userid/{userid}/credit")
-    public ResponseEntity<Object> creditByUserID(
-            @PathVariable("userid") UUID ID,
-            @RequestBody WalletTransactionContract walletTransactionContract) {
-        return walletService.creditByUserID(ID, walletTransactionContract.getAmount());
-    }
-
-    @Override
-    @PutMapping("userid/{userid}/debit")
-    public ResponseEntity<Object> debitByUserID(
-            @PathVariable("userid") UUID ID,
-            @RequestBody WalletTransactionContract walletTransactionContract) {
-        return walletService.creditByUserID(ID, walletTransactionContract.getAmount());
-    }
 }

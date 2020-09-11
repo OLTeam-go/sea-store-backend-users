@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
@@ -100,72 +99,6 @@ public class WalletService {
         HttpStatus status = HttpStatus.OK;
         if (rowChanges == 0)
             status = HttpStatus.NOT_FOUND;
-
-        return new ResponseEntity<Object>(null, status);
-    }
-
-    public ResponseEntity<Object> debitByID(UUID ID, BigDecimal amount) {
-        Integer rowChanges = 0;
-        HttpStatus status = HttpStatus.OK;
-
-        try {
-            Wallet findWallet = walletRepo.getByID(ID);
-            if (findWallet.getBalance().subtract(amount).compareTo(new BigDecimal(0)) < 0) {
-                status = HttpStatus.FORBIDDEN;
-            } else {
-                rowChanges = walletRepo.debitByID(ID, amount);
-            }
-
-        } catch (EmptyResultDataAccessException e) {
-            status = HttpStatus.NOT_FOUND;
-        }
-
-        return new ResponseEntity<Object>(null, status);
-    }
-
-    public ResponseEntity<Object> creditByID(UUID ID, BigDecimal amount) {
-        Integer rowChanges = 0;
-        HttpStatus status = HttpStatus.OK;
-
-        try {
-            rowChanges = walletRepo.creditByID(ID, amount);
-        } catch (EmptyResultDataAccessException e) {
-            status = HttpStatus.NOT_FOUND;
-        }
-
-        return new ResponseEntity<Object>(null, status);
-    }
-
-
-    public ResponseEntity<Object> debitByUserID(UUID ID, BigDecimal amount) {
-        Integer rowChanges = 0;
-        HttpStatus status = HttpStatus.OK;
-
-        try {
-            Wallet findWallet = walletRepo.getByUserID(ID);
-            if (findWallet.getBalance().subtract(amount).compareTo(new BigDecimal(0)) < 0) {
-                status = HttpStatus.FORBIDDEN;
-            } else {
-                rowChanges = walletRepo.debitByID(findWallet.getID(), amount);
-            }
-
-        } catch (EmptyResultDataAccessException e) {
-            status = HttpStatus.NOT_FOUND;
-        }
-
-        return new ResponseEntity<Object>(null, status);
-    }
-
-    public ResponseEntity<Object> creditByUserID(UUID ID, BigDecimal amount) {
-        Integer rowChanges = 0;
-        HttpStatus status = HttpStatus.OK;
-
-        try {
-            Wallet findWallet = walletRepo.getByUserID(ID);
-            rowChanges = walletRepo.creditByID(findWallet.getID(), amount);
-        } catch (EmptyResultDataAccessException e) {
-            status = HttpStatus.NOT_FOUND;
-        }
 
         return new ResponseEntity<Object>(null, status);
     }
