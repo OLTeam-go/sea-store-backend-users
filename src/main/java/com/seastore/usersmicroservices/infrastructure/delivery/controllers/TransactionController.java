@@ -10,29 +10,40 @@ import java.util.UUID;
 
 public interface TransactionController {
 
-    @PutMapping("/transactions/{id}/credit")
+    @PutMapping("/{id}/credit")
     public ResponseEntity<Object> creditByID(
             @PathVariable("id") UUID ID,
             @RequestBody WalletTransactionContract walletTransactionContract
     );
 
-    @PutMapping("/transactions/{id}/debit")
+    @PutMapping("/{id}/debit")
     public ResponseEntity<Object> debitByID(
             @PathVariable("id") UUID ID,
             @RequestBody WalletTransactionContract walletTransactionContract
     );
 
-    @PutMapping("/transactions/userid/{userid}/credit")
+    @PutMapping("/users/{user_id}/credit")
     public ResponseEntity<Object> creditByUserID(
-            @PathVariable("userid") UUID ID,
+            @PathVariable("user_id") UUID ID,
             @RequestBody WalletTransactionContract walletTransactionContract
     );
 
-    @PutMapping("/transactions/userid/{userid}/debit")
+    @PutMapping("/users/{user_id}/debit")
     public ResponseEntity<Object> debitByUserID(
-            @PathVariable("userid") UUID ID,
+            @PathVariable("user_id") UUID ID,
             @RequestBody WalletTransactionContract walletTransactionContract
     );
 
+    @PutMapping("/username/{username}/credit")
+    public ResponseEntity<Object> creditByUserUsername(
+            @PathVariable("username") String username,
+            @RequestBody WalletTransactionContract walletTransactionContract
+    );
+
+    @PutMapping("/username/{username}/debit")
+    public ResponseEntity<Object> debitByUserUsername(
+            @PathVariable("username") String username,
+            @RequestBody WalletTransactionContract walletTransactionContract
+    );
 }
 

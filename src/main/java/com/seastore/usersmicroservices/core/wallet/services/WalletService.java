@@ -24,14 +24,14 @@ public class WalletService {
     }
 
     public Wallet create(Wallet wallet) {
-        Wallet newWallet = new Wallet(
+        Wallet createdWallet = new Wallet(
                 wallet.getID(),
                 wallet.getUserID(),
                 wallet.getBalance(),
                 new Timestamp(System.currentTimeMillis()),
                 new Timestamp(System.currentTimeMillis())
         );
-        return walletRepo.create(newWallet);
+        return walletRepo.create(createdWallet);
     }
 
     public List<Wallet> getAll() {

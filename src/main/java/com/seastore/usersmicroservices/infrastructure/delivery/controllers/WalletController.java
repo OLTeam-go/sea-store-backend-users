@@ -34,7 +34,7 @@ public interface WalletController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateByID(
             @PathVariable("id") UUID ID,
-            @RequestBody Wallet walltToUpdate
+            @RequestBody Wallet walletToUpdate
     );
 
     @DeleteMapping("/{id}")
