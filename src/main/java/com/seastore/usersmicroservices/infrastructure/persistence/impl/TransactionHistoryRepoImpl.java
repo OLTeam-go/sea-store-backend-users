@@ -22,7 +22,7 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
 
     @Override
     public TransactionHistory create(TransactionHistory transactionHistory) {
-        final String sql = "insert into TransactionsHistory" +
+        final String sql = "insert into TransactionsHistories" +
                 "(ID, User_ID, Wallet_ID, Amount, Created_At, Updated_At) " +
                 "values(?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
@@ -46,7 +46,7 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
                 "Created_At, " +
                 "Updated_At " +
                 "from " +
-                "TransactionsHistory " +
+                "TransactionsHistories " +
                 "where " +
                 "ID=?";
         return jdbcTemplate.queryForObject(sql, new Object[]{findID}, ((result, i) -> {
@@ -71,7 +71,7 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
                 "Created_At, " +
                 "Updated_At " +
                 "from " +
-                "TransactionsHistory";
+                "TransactionsHistories";
         return jdbcTemplate.query(sql, ((result, i) -> {
             UUID ID = UUID.fromString(result.getString("ID"));
             UUID userID = UUID.fromString(result.getString("User_ID"));
@@ -85,7 +85,7 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
 
     @Override
     public Integer updateByID(UUID findID, TransactionHistory transactionHistoryToUpdate) {
-        final String sql = "update TransactionsHistory set User_ID=?, Wallet_ID=?, Amount=?, Created_At=?, Updated_At=? where ID=?";
+        final String sql = "update TransactionsHistories set User_ID=?, Wallet_ID=?, Amount=?, Created_At=?, Updated_At=? where ID=?";
         return jdbcTemplate.update(sql,
                 transactionHistoryToUpdate.getUserID(),
                 transactionHistoryToUpdate.getWalletID(),
@@ -97,7 +97,7 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
 
     @Override
     public Integer deleteByID(UUID findID) {
-        final String sql = "delete from TransactionsHistory where ID=?";
+        final String sql = "delete from TransactionsHistories where ID=?";
         return jdbcTemplate.update(sql, findID);
     }
 
