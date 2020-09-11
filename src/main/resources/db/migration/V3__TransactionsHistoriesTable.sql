@@ -1,4 +1,4 @@
-create table TransactionsHistory
+create table TransactionsHistories
 (
     ID         uuid primary key not null,
     User_ID    uuid             not null,
@@ -6,11 +6,11 @@ create table TransactionsHistory
     Amount     money            not null,
     Created_At timestamp        not null,
     Updated_At timestamp        not null,
-    CONSTRAINT FK_TransactionsHistory_Users
+    CONSTRAINT FK_TransactionsHistories_Users
         foreign key (User_ID) references Users (ID)
             on update cascade
             on delete cascade,
-    CONSTRAINT FK_TransactionsHistory_Wallet
+    CONSTRAINT FK_TransactionsHistories_Wallet
         foreign key (Wallet_ID) references Wallets (ID)
             on update cascade
             on delete cascade
