@@ -1,4 +1,4 @@
-package com.seastore.usersmicroservices.infrastructure.delivery.converters;
+package com.seastore.usersmicroservices.infrastructure.delivery.contracts;
 
 public class LoginContract {
     private final String username;

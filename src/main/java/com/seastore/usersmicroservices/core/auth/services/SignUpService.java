@@ -1,9 +1,9 @@
 package com.seastore.usersmicroservices.core.auth.services;
 
 
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.RegisterAdminContract;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.RegisterCustomerContract;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.RegisterMerchantContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.RegisterAdminContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.RegisterCustomerContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.RegisterMerchantContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.Wallet;
 import com.seastore.usersmicroservices.infrastructure.persistence.repositories.UserRepo;

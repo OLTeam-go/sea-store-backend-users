@@ -1,4 +1,4 @@
-package com.seastore.usersmicroservices.infrastructure.delivery.converters;
+package com.seastore.usersmicroservices.infrastructure.delivery.contracts;
 
 import java.math.BigDecimal;
 

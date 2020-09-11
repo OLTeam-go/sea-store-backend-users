@@ -1,9 +1,9 @@
 package com.seastore.usersmicroservices.infrastructure.delivery.controllers;
 
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.LoginContract;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.RegisterAdminContract;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.RegisterCustomerContract;
-import com.seastore.usersmicroservices.infrastructure.delivery.converters.RegisterMerchantContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.LoginContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.RegisterAdminContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.RegisterCustomerContract;
+import com.seastore.usersmicroservices.infrastructure.delivery.contracts.RegisterMerchantContract;
 import com.seastore.usersmicroservices.infrastructure.persistence.entities.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
