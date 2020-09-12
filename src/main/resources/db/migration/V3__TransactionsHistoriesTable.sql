@@ -3,7 +3,8 @@ create table TransactionsHistories
     ID         uuid primary key not null,
     User_ID    uuid             not null,
     Wallet_ID  uuid             not null,
-    Amount     money            not null,
+    Amount     numeric          not null,
+    Type       varchar          not null,
     Created_At timestamp        not null,
     Updated_At timestamp        not null,
     CONSTRAINT FK_TransactionsHistories_Users

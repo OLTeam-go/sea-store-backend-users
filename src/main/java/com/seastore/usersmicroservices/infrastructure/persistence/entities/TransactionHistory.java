@@ -11,14 +11,16 @@ public class TransactionHistory {
     private final UUID userID;
     private final UUID walletID;
     private final BigDecimal amount;
+    private final String type;
     private final Timestamp createdAt;
     private final Timestamp updatedAt;
 
-    public TransactionHistory(UUID ID, UUID userID, UUID walletID, BigDecimal amount, Timestamp createdAt, Timestamp updatedAt) {
+    public TransactionHistory(UUID ID, UUID userID, UUID walletID, BigDecimal amount, String type, Timestamp createdAt, Timestamp updatedAt) {
         this.ID = ID;
         this.userID = userID;
         this.walletID = walletID;
         this.amount = amount;
+        this.type = type;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -39,6 +41,10 @@ public class TransactionHistory {
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    public String getType() {
+        return type;
     }
 
     @JsonProperty("created_at")

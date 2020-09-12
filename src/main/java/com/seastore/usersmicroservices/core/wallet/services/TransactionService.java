@@ -50,6 +50,7 @@ public class TransactionService {
                         findWallet.getUserID(),
                         findWallet.getID(),
                         amount,
+                        "debit",
                         new Timestamp(System.currentTimeMillis()),
                         new Timestamp(System.currentTimeMillis())
                 );
@@ -82,6 +83,7 @@ public class TransactionService {
                     findWallet.getUserID(),
                     findWallet.getID(),
                     amount,
+                    "credit",
                     new Timestamp(System.currentTimeMillis()),
                     new Timestamp(System.currentTimeMillis())
             );
@@ -117,6 +119,7 @@ public class TransactionService {
                         findWallet.getUserID(),
                         findWallet.getID(),
                         amount,
+                        "debit",
                         new Timestamp(System.currentTimeMillis()),
                         new Timestamp(System.currentTimeMillis())
                 );
@@ -148,6 +151,7 @@ public class TransactionService {
                     findWallet.getUserID(),
                     findWallet.getID(),
                     amount,
+                    "credit",
                     new Timestamp(System.currentTimeMillis()),
                     new Timestamp(System.currentTimeMillis())
             );
@@ -182,6 +186,7 @@ public class TransactionService {
                         findWallet.getUserID(),
                         findWallet.getID(),
                         amount,
+                        "debit",
                         new Timestamp(System.currentTimeMillis()),
                         new Timestamp(System.currentTimeMillis())
                 );
@@ -213,6 +218,7 @@ public class TransactionService {
                     findWallet.getUserID(),
                     findWallet.getID(),
                     amount,
+                    "credit",
                     new Timestamp(System.currentTimeMillis()),
                     new Timestamp(System.currentTimeMillis())
             );

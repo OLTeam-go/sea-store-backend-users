@@ -23,13 +23,14 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
     @Override
     public TransactionHistory create(TransactionHistory transactionHistory) {
         final String sql = "insert into TransactionsHistories" +
-                "(ID, User_ID, Wallet_ID, Amount, Created_At, Updated_At) " +
-                "values(?, ?, ?, ?, ?, ?)";
+                "(ID, User_ID, Wallet_ID, Amount, Type, Created_At, Updated_At) " +
+                "values(?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql,
                 transactionHistory.getID(),
                 transactionHistory.getUserID(),
                 transactionHistory.getWalletID(),
                 transactionHistory.getAmount(),
+                transactionHistory.getType(),
                 transactionHistory.getCreatedAt(),
                 transactionHistory.getUpdatedAt()
         );
@@ -43,6 +44,7 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
                 "User_ID, " +
                 "Wallet_ID, " +
                 "Amount, " +
+                "Type, " +
                 "Created_At, " +
                 "Updated_At " +
                 "from " +
@@ -54,9 +56,10 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
             UUID userID = UUID.fromString(result.getString("User_ID"));
             UUID walletID = UUID.fromString(result.getString("Wallet_ID"));
             BigDecimal amount = result.getBigDecimal("Amount");
+            String type = result.getString("Type");
             Timestamp createdAt = result.getTimestamp("Created_At");
             Timestamp updatedAt = result.getTimestamp("Updated_At");
-            return new TransactionHistory(ID, userID, walletID, amount, createdAt, updatedAt);
+            return new TransactionHistory(ID, userID, walletID, amount, type, createdAt, updatedAt);
         }));
     }
 
@@ -68,6 +71,7 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
                 "User_ID, " +
                 "Wallet_ID, " +
                 "Amount, " +
+                "Type, " +
                 "Created_At, " +
                 "Updated_At " +
                 "from " +
@@ -77,19 +81,21 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
             UUID userID = UUID.fromString(result.getString("User_ID"));
             UUID walletID = UUID.fromString(result.getString("Wallet_ID"));
             BigDecimal amount = result.getBigDecimal("Amount");
+            String type = result.getString("Type");
             Timestamp createdAt = result.getTimestamp("Created_At");
             Timestamp updatedAt = result.getTimestamp("Updated_At");
-            return new TransactionHistory(ID, userID, walletID, amount, createdAt, updatedAt);
+            return new TransactionHistory(ID, userID, walletID, amount, type, createdAt, updatedAt);
         }));
     }
 
     @Override
     public Integer updateByID(UUID findID, TransactionHistory transactionHistoryToUpdate) {
-        final String sql = "update TransactionsHistories set User_ID=?, Wallet_ID=?, Amount=?, Created_At=?, Updated_At=? where ID=?";
+        final String sql = "update TransactionsHistories set User_ID=?, Wallet_ID=?, Amount=?, Type=?, Created_At=?, Updated_At=? where ID=?";
         return jdbcTemplate.update(sql,
                 transactionHistoryToUpdate.getUserID(),
                 transactionHistoryToUpdate.getWalletID(),
                 transactionHistoryToUpdate.getAmount(),
+                transactionHistoryToUpdate.getType(),
                 transactionHistoryToUpdate.getCreatedAt(),
                 transactionHistoryToUpdate.getUpdatedAt()
         );

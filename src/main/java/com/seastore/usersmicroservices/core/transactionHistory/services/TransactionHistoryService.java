@@ -28,6 +28,7 @@ public class TransactionHistoryService {
                 transactionHistory.getUserID(),
                 transactionHistory.getWalletID(),
                 transactionHistory.getAmount(),
+                transactionHistory.getType(),
                 new Timestamp(System.currentTimeMillis()),
                 new Timestamp(System.currentTimeMillis())
         );
@@ -60,6 +61,7 @@ public class TransactionHistoryService {
                     transactionHistoryToUpdate.getUserID(),
                     transactionHistoryToUpdate.getWalletID(),
                     transactionHistoryToUpdate.getAmount(),
+                    transactionHistoryToUpdate.getType(),
                     transactionHistoryToUpdate.getCreatedAt(),
                     new Timestamp(System.currentTimeMillis())
             );
