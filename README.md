@@ -5,8 +5,8 @@ All about users microservice
 ## USER API DOCUMENTATION
 
 ### GET /users
-Obtain information about list of users\
-Success response(200): Successfully returned list of users\
+Obtain information about list of users  
+Success response(200): Successfully returned list of users  
 Example Value | Model:
 ```
 [
@@ -26,8 +26,8 @@ Example Value | Model:
 ```
 
 ### POST /users
-Post a new user into the database\
-Success response(200): Successfully posted a user\
+Post a new user into the database  
+Success response(200): Successfully posted a user  
 body(Example Value | Model):
 ```
 {
@@ -45,9 +45,9 @@ body(Example Value | Model):
 ```
 
 ### GET /users/{id}
-Obtain information about a user from unique ID\
-Parameters: id("string")\
-Success response(200): Successfully returned a user\
+Obtain information about a user from unique ID  
+Parameters: id("string")  
+Success response(200): Successfully returned a user  
 Example Value | Model:
 ```
 [
@@ -67,10 +67,10 @@ Example Value | Model:
 ```
 
 ### PUT /users/{id}
-Put a user\
-Parameters: id("string")\
-Success response(200): Successfully updated a user\
-Error response(404): User not found\
+Put a user  
+Parameters: id("string")  
+Success response(200): Successfully updated a user  
+Error response(404): User not found  
 body(Example Value | Model):
 ```
 {
@@ -86,10 +86,10 @@ body(Example Value | Model):
 ```
 
 ### PUT /users/{id}/setting
-Put a user by username and password\
-Parameters: id("string")\
-Success response(200): Successfully updated a user\
-Error response(404): User not found\
+Put a user by username and password  
+Parameters: id("string")  
+Success response(200): Successfully updated a user  
+Error response(404): User not found  
 body(Example Value | Model):
 ```
 {
@@ -110,10 +110,10 @@ body(Example Value | Model):
 ```
 
 ### DELETE /user/{id}
-Delete a user\
-Parameters: id("string", Parameters)\
-Success response(200): Successfully deleted a user\
-Error response(404): User not found\
+Delete a user  
+Parameters: id("string", Parameters)  
+Success response(200): Successfully deleted a user  
+Error response(404): User not found  
 
 ## AUTH API DOCUMENTATION
 
@@ -126,7 +126,7 @@ credentials, body(Example Value | Model):
   "password": "string"
 }
 ```
-Success response(200): Successfully login a user\
+Success response(200): Successfully login a user  
 Response(Example Value | Model):
 ```
 {
@@ -142,10 +142,10 @@ Response(Example Value | Model):
   "updated_at": "string"
 }
 ```
-Error response(401): Unauthorized because wrong credentials given\
+Error response(401): Unauthorized because wrong credentials given  
 
 ### POST /register/customer
-Register a user as customer\
+Register a user as customer  
 credentials, body(Example Value | Model):
 ```
 {
@@ -156,10 +156,10 @@ credentials, body(Example Value | Model):
   "gender": "string"
 }
 ```
-Success response(200): Successfully registered a user\
+Success response(200): Successfully registered a user  
 
 ### POST /register/merchant
-Register a user as merchant\
+Register a user as merchant  
 credentials, body(Example Value | Model):
 ```
 {
@@ -170,10 +170,10 @@ credentials, body(Example Value | Model):
   "gender": "string"
 }
 ```
-Success response(200): Successfully registered a merchant\
+Success response(200): Successfully registered a merchant  
 
 ### POST /register/admin
-Register a user as customer\
+Register a user as customer  
 credentials, body(Example Value | Model):
 ```
 {
@@ -185,13 +185,13 @@ credentials, body(Example Value | Model):
   "token": "string"
 }
 ```
-Success response(200): Successfully registered an admin\
-Error response(401): Unauthorized because wrong token given\
+Success response(200): Successfully registered an admin  
+Error response(401): Unauthorized because wrong token given  
 
 ### GET /register/merchant/pending
-Obtain information about list of users\
-Parameters: id("string")\
-Success response(200): Successfully returned list of merchant\
+Obtain information about list of users  
+Parameters: id("string")  
+Success response(200): Successfully returned list of merchant  
 Example Value | Model:
 ```
 [
@@ -212,12 +212,12 @@ Example Value | Model:
 
 ### PUT /register/merchant/pending/{userid}/accept
 Put a user
-Parameters: userid("string")\
-Success response(200): Successfully accept a pending merchant\
-Error response(404): Merchant not found\
+Parameters: userid("string")  
+Success response(200): Successfully accept a pending merchant  
+Error response(404): Merchant not found  
 
 ### PUT /register/merchant/pending/{userid}/reject
 Put a user
-Parameters: userid("string")\
-Success response(200): Successfully reject a pending merchant\
-Error response(404): Merchant not found\
+Parameters: userid("string")  
+Success response(200): Successfully reject a pending merchant  
+Error response(404): Merchant not found  
