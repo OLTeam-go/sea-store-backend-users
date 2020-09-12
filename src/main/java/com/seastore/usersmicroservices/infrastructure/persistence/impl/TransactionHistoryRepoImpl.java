@@ -97,7 +97,8 @@ public class TransactionHistoryRepoImpl implements TransactionHistoryRepo {
                 transactionHistoryToUpdate.getAmount(),
                 transactionHistoryToUpdate.getType(),
                 transactionHistoryToUpdate.getCreatedAt(),
-                transactionHistoryToUpdate.getUpdatedAt()
+                transactionHistoryToUpdate.getUpdatedAt(),
+                findID
         );
     }
 
