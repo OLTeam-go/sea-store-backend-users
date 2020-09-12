@@ -1,17 +1,17 @@
 # sea-store-backend-users
 
 All about users microservice  
-
-- User API  
-https://app.swaggerhub.com/apis-docs/olteam-go/User/1.0.0
+- Users API  
+https://app.swaggerhub.com/apis-docs/olteam-go/Users/1.0.0
 - Auth API  
 https://app.swaggerhub.com/apis-docs/olteam-go/Auth/1.0.0
-- Wallet API  
-https://app.swaggerhub.com/apis-docs/olteam-go/Wallet/1.0.0
-- Transaction API  
-https://app.swaggerhub.com/apis-docs/olteam-go/Transaction/1.0.0
-- Transaction History API  
-https://app.swaggerhub.com/apis-docs/olteam-go/TransactionHistory/1.0.0
+- Wallets API  
+https://app.swaggerhub.com/apis-docs/olteam-go/Wallets/1.0.0
+- Transactions API  
+https://app.swaggerhub.com/apis-docs/olteam-go/Transactions/1.0.0
+- Transactions Histories API  
+https://app.swaggerhub.com/apis-docs/olteam-go/TransactionsHistories/1.0.0
+
 ## USER API DOCUMENTATION
 
 ### GET /users
