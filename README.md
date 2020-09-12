@@ -1,6 +1,7 @@
 # sea-store-backend-users
 
 All about users microservice  
+
 - Users API  
 https://app.swaggerhub.com/apis-docs/olteam-go/Users/1.0.0
 - Auth API  
@@ -11,13 +12,6 @@ https://app.swaggerhub.com/apis-docs/olteam-go/Wallets/1.0.0
 https://app.swaggerhub.com/apis-docs/olteam-go/Transactions/1.0.0
 - Transactions Histories API  
 https://app.swaggerhub.com/apis-docs/olteam-go/TransactionsHistories/1.0.0
-
-## Usage
-Instructions to run a project 
-
-1. Open pom.xml in IntelliJ IDEA
-2. Run (Shift + F10)
-
 ## USER API DOCUMENTATION
 
 ### GET /users
@@ -87,7 +81,7 @@ Put a user
 Parameters: id("string")  
 Success response(200): Successfully updated a user  
 Error response(404): User not found  
-body(Example Value | Model):
+body(Example Value | Model):  
 ```
 {
   "ID": "string",
@@ -106,7 +100,7 @@ Put a user by username and password
 Parameters: id("string")  
 Success response(200): Successfully updated a user  
 Error response(404): User not found  
-body(Example Value | Model):
+body(Example Value | Model):  
 ```
 {
   "login_credentials": {
@@ -134,7 +128,7 @@ Error response(404): User not found
 ## AUTH API DOCUMENTATION
 
 ### POST /login
-Login a user
+Login a user  
 credentials, body(Example Value | Model):
 ```
 {
@@ -162,7 +156,7 @@ Error response(401): Unauthorized because wrong credentials given
 
 ### POST /register/customer
 Register a user as customer  
-credentials, body(Example Value | Model):
+credentials, body(Example Value | Model):  
 ```
 {
   "username": "string",
@@ -227,13 +221,236 @@ Example Value | Model:
 ```
 
 ### PUT /register/merchant/pending/{userid}/accept
-Put a user
+Put a user  
 Parameters: userid("string")  
 Success response(200): Successfully accept a pending merchant  
 Error response(404): Merchant not found  
 
 ### PUT /register/merchant/pending/{userid}/reject
-Put a user
+Put a user  
 Parameters: userid("string")  
 Success response(200): Successfully reject a pending merchant  
 Error response(404): Merchant not found  
+
+## WALLET API DOCUMENTATION
+
+### GET /wallets
+Obtain information about list of wallets  
+Success response(200): Successfully returned list of wallets  
+Example Value | Model:
+```
+[
+  {
+    "id": "string",
+    "user_id": "string",
+    "balance": "string",
+    "created_at": "string",
+    "updated_at": "string"
+  }
+]
+```
+
+### POST /wallets
+Post a new wallet
+credentials, body(Example Value | Model):
+```
+{
+  "id": "string",
+  "user_id": "string",
+  "balance": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
+Success response(200): Successfully posted a wallet  
+
+### GET /wallets/{id}
+Obtain information about a wallet from unique ID  
+Parameters: id("string")  
+Success response(200): Successfully returned a wallet  
+Example Value | Model:
+```
+[
+  {
+    "id": "string",
+    "user_id": "string",
+    "balance": "string",
+    "created_at": "string",
+    "updated_at": "string"
+  }
+]
+```
+Error response(404): Wallet not found  
+
+### PUT /wallets/{id}
+Put a wallet  
+Parameters: id("string")  
+user, body(Example Value | Model):
+```
+{
+  "id": "string",
+  "user_id": "string",
+  "balance": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
+Success response(200): Successfully updated a wallet  
+Error response(404): Wallet not found  
+
+### DELETE /wallets/{id}
+Delete a wallet  
+Parameters: id("string", Parameters)  
+Success response(200): Successfully deleted a wallet  
+Error response(404): Wallet not found  
+
+## TRANSACTIONS API DOCUMENTATION
+
+### PUT /{id}/credit
+Credit amount of balance to a wallet by wallet ID  
+Parameters: id("string")  
+wallet, body(Example Value | Model):
+```
+{
+  "amount": 0
+}
+```
+Success response(200): Successfully credit amount of balance to a wallet  
+Error response(404): Wallet not found    
+
+### PUT /{id}/debit
+Debit amount of balance to a wallet by wallet ID  
+Parameters: id("string")  
+wallet, body(Example Value | Model):
+```
+{
+  "amount": 0
+}
+```
+Success response(200): Successfully debit amount of balance to a wallet  
+Error response(403): Wallet amount exceed the balance to transact  
+Error response(404): Wallet not found  
+
+### PUT /users/{user_id}/credit
+Credit amount of balance to a wallet by user ID  
+Parameters: user_id("string")  
+walet, body(Example Value | Model):
+```
+{
+  "amount": 0
+}
+```
+Success response(200): Successfully credit amount of balance to a wallet  
+Error response(404): Wallet not found  
+
+### PUT /users/{user_id}/debit
+Debit amount of balance to a wallet by user ID  
+Parameters: user_id("string")  
+walet, body(Example Value | Model):
+```
+{
+  "amount": 0
+}
+```
+Success response(200): Successfully debit amount of balance to a wallet  
+Error response(403): Wallet amount exceed the balance to transact  
+Error response(404): Wallet not found  
+
+### PUT /usernames/{username}/credit
+Credit amount of balance to a wallet by user username  
+Parameters: username("string")  
+wallet, body(Example Value | Model):
+```
+{
+  "amount": 0
+}
+```
+Success response(200): Successfully credit amount of balance to a wallet  
+Error response(404): Wallet not found  
+
+### PUT /users/{user_id}/debit
+Debit amount of balance to a wallet by user username  
+Parameters: username("string")  
+wallet, body(Example Value | Model):
+```
+{
+  "amount": 0
+}
+```
+Success response(200): Successfully debit amount of balance to a wallet  
+Error response(403): Wallet amount exceed the balance to transact  
+Error response(404): Wallet not found  
+
+## TRANSACTIONS HISTORIES API DOCUMENTATION
+
+### GET /histories
+Obtain information about list of transactions history  
+Success response(200): Successfully returned list of transactions history  
+Example Value | Model:
+```
+[
+  {
+    "id": "string",
+    "user_id": "string",
+    "wallet_id": "string",
+    "amount": "string",
+    "created_at": "string",
+    "updated_at": "string"
+  }
+]
+```
+
+### POST /histories
+Post a new transaction history  
+wallet, body(Example Value | Model):
+```
+{
+  "id": "string",
+  "user_id": "string",
+  "wallet_id": "string",
+  "amount": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
+Success response(200): Successfully posted a transaction history  
+
+### GET /histories/{id}
+Obtain information about a transaction history from unique ID  
+Parameters: id("string")  
+Success response(200): Successfully returned a transaction history  
+Example Value | Model:
+```
+{
+  "id": "string",
+  "user_id": "string",
+  "wallet_id": "string",
+  "amount": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
+Error response(404): Transaction history not found  
+
+### PUT /histories/{id}
+Put a transaction history  
+Parameters: id("string")  
+user, body(Example Value | Model):
+```
+{
+  "id": "string",
+  "user_id": "string",
+  "wallet_id": "string",
+  "amount": "string",
+  "created_at": "string",
+  "updated_at": "string"
+}
+```
+Success response(200): Successfully updated a transaction history  
+Error response(404): Transaction history not found  
+
+### DELETE /wallets/{id}
+Delete a transaction history  
+Parameters: id("string", Parameters)  
+Success response(200): Successfully deleted a transaction history  
+Error response(404): Transaction history not found  
