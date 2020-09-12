@@ -12,6 +12,12 @@ https://app.swaggerhub.com/apis-docs/olteam-go/Transactions/1.0.0
 - Transactions Histories API  
 https://app.swaggerhub.com/apis-docs/olteam-go/TransactionsHistories/1.0.0
 
+## Usage
+Instructions to run a project 
+
+1. Open pom.xml in IntelliJ IDEA
+2. Run (Shift + F10)
+
 ## USER API DOCUMENTATION
 
 ### GET /users
