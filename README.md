@@ -12,7 +12,9 @@ https://app.swaggerhub.com/apis-docs/olteam-go/Wallets/1.0.0
 https://app.swaggerhub.com/apis-docs/olteam-go/Transactions/1.0.0
 - Transactions Histories API  
 https://app.swaggerhub.com/apis-docs/olteam-go/TransactionsHistories/1.0.0
+
 ## USER API DOCUMENTATION
+Base URL: sea-store-backend-users.herokuapp.com/api/v1/users  
 
 ### GET /users
 Obtain information about list of users  
@@ -126,6 +128,7 @@ Success response(200): Successfully deleted a user
 Error response(404): User not found  
 
 ## AUTH API DOCUMENTATION
+Base URL: sea-store-backend-users.herokuapp.com/api/v1/auth
 
 ### POST /login
 Login a user  
@@ -233,6 +236,7 @@ Success response(200): Successfully reject a pending merchant
 Error response(404): Merchant not found  
 
 ## WALLET API DOCUMENTATION
+Base URL: sea-store-backend-users.herokuapp.com/api/v1/wallets
 
 ### GET /wallets
 Obtain information about list of wallets  
@@ -305,6 +309,7 @@ Success response(200): Successfully deleted a wallet
 Error response(404): Wallet not found  
 
 ## TRANSACTIONS API DOCUMENTATION
+Base URL: sea-store-backend-users.herokuapp.com/api/v1/transactions
 
 ### PUT /{id}/credit
 Credit amount of balance to a wallet by wallet ID  
@@ -382,6 +387,7 @@ Error response(403): Wallet amount exceed the balance to transact
 Error response(404): Wallet not found  
 
 ## TRANSACTIONS HISTORIES API DOCUMENTATION
+Base URL: sea-store-backend-users.herokuapp.com/api/v1/transactions/histories
 
 ### GET /histories
 Obtain information about list of transactions history  
